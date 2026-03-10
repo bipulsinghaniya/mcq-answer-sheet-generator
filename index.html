@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Answer Sheet Generator</title>
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Config for custom animation -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col items-center p-4 sm:p-8">
+    <!-- Header / Input Card -->
+    <div
+        class="w-full max-w-2xl bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-6 sm:mb-8 transition-shadow hover:shadow-md">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center tracking-tight">MCQ Answer Sheet
+            Generator</h1>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4 justify-center">
+            <div class="flex flex-col w-full sm:w-auto">
+                <label for="numQs" class="text-sm font-medium text-gray-600 mb-1 ml-1">Number of Questions</label>
+                <input type="number" id="numQs" min="1" max="500" placeholder="e.g. 40"
+                    class="w-full sm:w-56 px-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-lg shadow-inner bg-gray-50/50">
+            </div>
+            <div class="flex flex-col justify-end h-full w-full sm:w-auto mt-2 sm:mt-auto">
+                <button id="generateBtn"
+                    class="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 transform active:scale-95">
+                    Generate Sheet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generated Sheet Container -->
+    <div id="sheetContainer"
+        class="w-full max-w-2xl bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 hidden relative">
+        <div
+            class="sticky top-0 bg-white/95 backdrop-blur-sm z-10 flex flex-col sm:flex-row justify-between items-center mb-6 pb-4 border-b border-gray-100 gap-4 pt-2">
+            <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                <span id="sheetCountBadge"
+                    class="bg-blue-100 text-blue-700 text-sm font-bold px-3 py-1 rounded-full">0</span>
+                Questions Ready
+            </h2>
+            <button id="clearBtn"
+                class="text-sm px-4 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg font-medium transition-colors border border-red-100">Reset
+                Selection</button>
+        </div>
+        <div id="qList" class="space-y-2 sm:space-y-3">
+            <!-- Questions injected here via Javascript -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

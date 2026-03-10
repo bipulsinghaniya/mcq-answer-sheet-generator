@@ -1,0 +1,73 @@
+/* Custom styles for MCQ Generator */
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Hide default radio inputs entirely */
+.mcq-option input[type="radio"] {
+    display: none;
+}
+
+/* Base styling for our custom option circles */
+.mcq-option label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px; /* full circle */
+    border: 2px solid #e2e8f0; /* slate-200 */
+    color: #64748b; /* slate-500 */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    background-color: white;
+}
+
+/* Hover state for options */
+.mcq-option label:hover {
+    border-color: #93c5fd; /* blue-300 */
+    background-color: #eff6ff; /* blue-50 */
+    color: #2563eb; /* blue-600 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Active/Clicked interaction */
+.mcq-option label:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* Selected/Checked state */
+.mcq-option input[type="radio"]:checked + label {
+    background-color: #2563eb; /* blue-600 */
+    border-color: #2563eb;
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+    transform: translateY(-1px) scale(1.05);
+}
+
+/* Row hover styling */
+.q-row {
+    transition: all 0.2s ease;
+}
+
+.q-row:hover {
+    background-color: #f8fafc; /* slate-50 */
+    border-radius: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+}
+
+/* Enhance mobile touch target sizes */
+@media (max-width: 640px) {
+    .mcq-option label {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.1rem;
+    }
+}
