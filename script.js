@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const qList = document.getElementById('qList');
     const clearBtn = document.getElementById('clearBtn');
     const sheetCountBadge = document.getElementById('sheetCountBadge');
+    const copyAnsBtn = document.getElementById('copyAnsBtn');
 
     // MCQ Options config
     const options = ['A', 'B', 'C', 'D'];
@@ -98,6 +99,38 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter') {
             generateSheet();
         }
+    });
+
+    // Copy answers logic
+    copyAnsBtn.addEventListener('click', () => {
+        const num = parseInt(sheetCountBadge.textContent);
+        if (num === 0) return;
+
+        let result = [];
+        for (let i = 1; i <= num; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected) {
+                result.push(`${i}->${selected.value}`);
+            } else {
+                result.push(`${i}->Not Answered`);
+            }
+        }
+        
+        const textToCopy = result.join('\n');
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalHTML = copyAnsBtn.innerHTML;
+            copyAnsBtn.textContent = 'Copied!';
+            copyAnsBtn.classList.remove('bg-green-600', 'hover:bg-green-700', 'active:bg-green-800');
+            copyAnsBtn.classList.add('bg-gray-600', 'hover:bg-gray-700', 'active:bg-gray-800');
+            setTimeout(() => {
+                copyAnsBtn.innerHTML = originalHTML;
+                copyAnsBtn.classList.remove('bg-gray-600', 'hover:bg-gray-700', 'active:bg-gray-800');
+                copyAnsBtn.classList.add('bg-green-600', 'hover:bg-green-700', 'active:bg-green-800');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            alert('Failed to copy answers to clipboard.');
+        });
     });
 
     // Reset selection logic
